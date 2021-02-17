@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -22,11 +23,11 @@ public class ProductRepositoryTest {
     private ProductRepository productRepository;
 
     @Test
-    public void testSaveProduct() {
+    public void testCaseSaveProduct() {
 
-        Product product = new Product(44l, "Product1", new BigDecimal("100"), "Detail 1");
+        Product product = new Product( "Product1", new BigDecimal("100"), "Detail 1");
         productRepository.save(product);
-        Product product2 = productRepository.findById(44l).get();
+        Product product2 = productRepository.findByName("Product1");
         assertNotNull(product2);
         assertEquals(product2.getName(), product.getName());
         assertEquals(product2.getDetail(), product.getDetail());
@@ -34,32 +35,49 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void testGetProduct() {
+    public void testCaseFindProductById() {
 
-        Product product = new Product(44l, "Product1", new BigDecimal("100"), "Detail 1");
-        productRepository.save(product);
-        Product product2 = productRepository.findById(44l).get();
+        Product product2 = productRepository.findById(1l).get();
         assertNotNull(product2);
-        assertEquals(product2.getName(), product.getName());
-        assertEquals(product2.getDetail(), product.getDetail());
-        assertEquals(product2.getPrice(), product.getPrice());
+        //from data.sql
+        assertEquals(product2.getName(), "PRODUCT");
+        assertEquals(product2.getDetail(), "PRODUCT DETAIL");
+        assertEquals(product2.getPrice(), new BigDecimal("220.00"));
     }
 
     @Test
-    public void testDeleteProduct() {
-        Product product = new Product(44l, "Product1", new BigDecimal("100"), "Detail 1");
+    public void testCaseDeleteProduct() {
+        Product product = new Product("Product1", new BigDecimal("100"), "Detail 1");
         productRepository.save(product);
-        productRepository.delete(product);
+        Product product2 = productRepository.findByName("Product1");
+        productRepository.delete(product2);
+        List<Product> products = productRepository.findAll();
+
+        //we had one from data sql, we added new one, but then removed one of them
+        assertEquals(1, products.size());
     }
 
     @Test
-    public void findAllProducts() {
-        Product product1 = new Product(44l, "Product1", new BigDecimal("100"), "Detail 1");
-        Product product2 = new Product(45l, "Product2", new BigDecimal("200"), "Detail 2");
+    public void testCaseFindAllProducts() {
+        Product product1 = new Product("Product1", new BigDecimal("100"), "Detail 1");
+        Product product2 = new Product("Product2", new BigDecimal("200"), "Detail 2");
         productRepository.save(product1);
         productRepository.save(product2);
-        assertNotNull(productRepository.findAll());
-        //one from data.sql
-        assertEquals(3, productRepository.findAll().size());
+        List<Product> products = productRepository.findAll();
+        assertNotNull(products);
+        //one row from data.sql
+        assertEquals(3, products.size());
+    }
+
+    @Test
+    public void testCaseFindAllProductsByNativeQuery() {
+        Product product1 = new Product("Product1", new BigDecimal("100"), "Detail 1");
+        Product product2 = new Product("Product2", new BigDecimal("200"), "Detail 2");
+        productRepository.save(product1);
+        productRepository.save(product2);
+        List<Product> products = productRepository.findAllWithNativeQuery();
+        assertNotNull(products);
+        //one row from data.sql
+        assertEquals(3, products.size());
     }
 }

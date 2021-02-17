@@ -18,7 +18,7 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="NAME")
+    @Column(name="NAME", unique = true)
     private String name;
 
     @Column(name="PRICE")
@@ -27,4 +27,9 @@ public class Product {
     @Column(name="DETAIL")
     private String detail;
 
+    public Product(String name, BigDecimal price, String detail) {
+        this.name = name;
+        this.price = price;
+        this.detail = detail;
+    }
 }
