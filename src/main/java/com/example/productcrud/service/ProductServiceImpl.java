@@ -1,8 +1,8 @@
 package com.example.productcrud.service;
 
-import com.example.productcrud.model.Category;
 import com.example.productcrud.model.Product;
 import com.example.productcrud.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +11,8 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
-
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    @Autowired
+    private ProductRepository productRepository;
 
 
     @Override
@@ -30,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product save(Product product) {
+
         return productRepository.save(product);
     }
 
@@ -38,8 +36,4 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
-    @Override
-    public List<Product> findProductsByCategory(Category category) {
-        return productRepository.findProductsByCategory(category);
-    }
 }

@@ -1,27 +1,11 @@
-com/example/productcrud/rest/CategoryController.java
- com.example.productcrud.rest.CategoryController
-com/example/productcrud/rest/ProductController.java
- com.example.productcrud.rest.ProductController
-com/example/productcrud/model/Category.java
- com.example.productcrud.model.Category
+com/example/productcrud/utils/Constants.java
+ com.example.productcrud.utils.Constants
 com/example/productcrud/service/ProductService.java
  com.example.productcrud.service.ProductService
 com/example/productcrud/model/Product.java
  com.example.productcrud.model.Product
-com/example/productcrud/service/CategoryService.java
- com.example.productcrud.service.CategoryService
-com/example/productcrud/repository/CategoryRepository.java
- com.example.productcrud.repository.CategoryRepository
-com/example/productcrud/service/CategoryServiceImpl.java
- com.example.productcrud.service.CategoryServiceImpl
-com/example/productcrud/utils/Constants.java
- com.example.productcrud.utils.Constants
-com/example/productcrud/exception/GeneralExceptionHandler.java
- com.example.productcrud.exception.GeneralExceptionHandler
 com/example/productcrud/utils/Result.java
  com.example.productcrud.utils.Result
-com/example/productcrud/utils/Currency.java
- com.example.productcrud.utils.Currency
 com/example/productcrud/repository/ProductRepository.java
  com.example.productcrud.repository.ProductRepository
 com/example/productcrud/exception/ApiError.java
@@ -30,8 +14,3 @@ com/example/productcrud/service/ProductServiceImpl.java
  com.example.productcrud.service.ProductServiceImpl
 com/example/productcrud/ProductCrudApplication.java
  com.example.productcrud.ProductCrudApplication
-com/example/productcrud/config/SwaggerConfiguration.java
- com.example.productcrud.config.SwaggerConfiguration
- com.example.productcrud.config.SwaggerConfiguration$IndexPageTransformer
-com/example/productcrud/exception/NotFoundException.java
- com.example.productcrud.exception.NotFoundException

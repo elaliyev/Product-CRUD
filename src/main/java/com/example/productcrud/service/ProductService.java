@@ -1,6 +1,5 @@
 package com.example.productcrud.service;
 
-import com.example.productcrud.model.Category;
 import com.example.productcrud.model.Product;
 
 import java.util.List;
@@ -12,5 +11,4 @@ public interface ProductService {
     Optional<Product> findById(long id);
     Product save(Product product);
     void deleteById(long id);
-    List<Product> findProductsByCategory(Category category);
 }
